@@ -11,22 +11,22 @@
         <q-route-tab
           :to="{name:'s_user'}"
           icon="person"
-          label="账户"
+          label="アカウント"
         />
         <q-route-tab
           :to="{name:'s_ui'}"
           icon="style"
-          label="外观"
+          label="外観"
         />
         <q-route-tab
           :to="{name:'s_hexo'}"
           icon="book"
-          label="博客"
+          label="ブログ"
         />
         <q-route-tab
           :to="{name:'s_security'}"
           icon="security"
-          label="安全"
+          label="セキュリティ"
         />
       </q-tabs>
       <div class="col">

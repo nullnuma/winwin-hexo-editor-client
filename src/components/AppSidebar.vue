@@ -16,7 +16,7 @@
         <q-item-section avatar="">
         </q-item-section>
         <q-item-section>
-          <q-item-label>向右拖动文章以编辑</q-item-label>
+          <q-item-label>記事を右にドラッグして編集します</q-item-label>
           <q-item-label caption lines="2">更多功能请自行探索</q-item-label>
         </q-item-section>
       </q-item>
@@ -50,7 +50,7 @@
           <q-item-label
             caption
             lines="2"
-          >当前主程序版本</q-item-label>
+          >プログラムリビジョン</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
@@ -68,21 +68,21 @@ export default {
     try {
       this.currentVersion = 'v' + await apis.info.version()
     } catch (err) {
-      this.currentVersion = '获取失败'
+      this.currentVersion = '取得失敗'
     }
   },
   data () {
     return {
-      currentVersion: '加载中',
+      currentVersion: '読込中',
       essentialLinks: [
         {
-          title: '项目主页',
+          title: 'プロジェクトホームページ',
           caption: '@winwin',
           icon: 'home',
           link: 'https://winwin_2011.gitee.io/winwin-hexo-editor/'
         },
         {
-          title: '获取源码',
+          title: 'ソースコード',
           caption: '@winwin',
           icon: 'code',
           link: 'https://gitee.com/winwin_2011/winwin-hexo-editor'

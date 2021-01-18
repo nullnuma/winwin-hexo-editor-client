@@ -6,7 +6,7 @@
         class="q-mb-md"
         v-model="hexoRoot"
         type="text"
-        label="博客相对路径"
+        label="ブログの相対パス"
         filled
         :error-message="errorMessage"
         :error="!!errorMessage"
@@ -55,9 +55,9 @@ export default {
         this.errorMessage = ''
       } catch (err) {
         if (err.response && err.response.status === 404) {
-          this.errorMessage = `${err.response.data.data.path} 不是有效hexo博客`
+          this.errorMessage = `${err.response.data.data.path} 有効なHexoブログではありません`
         } else {
-          message.error({ message: '保存失败', caption: err.message })
+          message.error({ message: '保存失敗', caption: err.message })
         }
       }
     }

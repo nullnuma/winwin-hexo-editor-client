@@ -6,7 +6,7 @@
           flat
           icon="arrow_back"
           aria-label="Menu"
-          label="回到主页"
+          label="ホームに戻る"
           @click="$router.push('/')"
         />
 

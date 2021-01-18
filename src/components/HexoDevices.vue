@@ -2,7 +2,7 @@
   <q-btn
     flat
     stretch
-    :label="isLoggedIn?'设备授权':'服务器地址'"
+    :label="isLoggedIn?'デバイス認証':'サーバーアドレス'"
   >
     <q-menu
       v-model="showPanel"
@@ -22,7 +22,7 @@
             size="sm"
           />
           <q-toolbar-title style="font-size:15px">
-            已授权设备
+            承認済みデバイス
           </q-toolbar-title>
           <q-btn
             flat
@@ -49,7 +49,7 @@
             v-if="!apikeys.length"
           >
             <q-item-section>
-              <q-item-label>无设备</q-item-label>
+              <q-item-label>なし</q-item-label>
             </q-item-section>
           </q-item>
           <q-item
@@ -61,11 +61,11 @@
               <q-item-label
                 caption
                 lines="2"
-              >注册时间：{{formatDate(item.issuedAt)}}</q-item-label>
+              >発行日：{{formatDate(item.issuedAt)}}</q-item-label>
               <q-item-label
                 caption
                 lines="3"
-              >最近登录：{{formatDate(item.lastUsedAt)}}</q-item-label>
+              >最近使用した：{{formatDate(item.lastUsedAt)}}</q-item-label>
             </q-item-section>
             <q-item-section side>
               <div class="text-grey-8 q-gutter-xs">
@@ -88,7 +88,7 @@
           >
             <q-item-section>
               <q-item-label>
-                共 {{apikeys.length}} 台设备
+                合計 {{apikeys.length}} 台のデバイス
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -111,7 +111,7 @@
             style="min-height:36px;user-select:none"
           >
             <q-toolbar-title style="font-size:15px">
-              使用移动设备扫码登录
+              スマートフォンのスキャンログイン
             </q-toolbar-title>
             <q-btn
               flat

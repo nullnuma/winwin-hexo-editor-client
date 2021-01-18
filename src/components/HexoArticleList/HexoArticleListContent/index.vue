@@ -6,7 +6,7 @@
     <q-list style="user-select:none">
       <q-item v-if="empty">
         <q-item-section>
-          <q-item-label>没有内容</q-item-label>
+          <q-item-label>コンテンツなし</q-item-label>
         </q-item-section>
       </q-item>
       <list-item

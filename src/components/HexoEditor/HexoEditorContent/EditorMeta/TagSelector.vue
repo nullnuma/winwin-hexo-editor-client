@@ -33,7 +33,7 @@
         <q-input
           v-model="text"
           dense
-          label="新标签"
+          label="新しいラベル"
           @keydown.enter="addTag"
         >
         </q-input>
@@ -45,7 +45,7 @@
       @click="addTag"
     >
       <q-item-section>
-        <q-item-label>添加标签</q-item-label>
+        <q-item-label>タグ付け</q-item-label>
       </q-item-section>
       <q-item-section avatar="">
         <q-icon name="add" />

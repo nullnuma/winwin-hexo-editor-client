@@ -13,7 +13,7 @@
       @dblclick="addPostByDefault"
     >
       <h2>
-        双击此处以新建一篇文章
+        新しい記事を作成するには、ここをクリックしてください
       </h2>
     </div>
   </div>

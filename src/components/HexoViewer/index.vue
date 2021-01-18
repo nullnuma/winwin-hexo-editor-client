@@ -9,7 +9,7 @@
     ></hexo-viewer-content>
     <q-inner-loading :showing="loading">
       <q-spinner-gears size="50px" color="primary" />
-      <h2>正在加载...</h2>
+      <h2>読込中...</h2>
     </q-inner-loading>
   </bar-content-layout>
   <hexo-loading v-else-if="loading"></hexo-loading>

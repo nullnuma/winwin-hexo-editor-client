@@ -6,11 +6,11 @@
       style="padding-top:5px;padding-bottom:5px"
     >
       <q-item-section avatar>
-        分类
+        カテゴリ
       </q-item-section>
       <q-item-section>
         <q-item-label>
-          {{categoriesList&&categoriesList.length?'':'无'}}
+          {{categoriesList&&categoriesList.length?'':'なし'}}
           <q-badge
             v-for="(item,key) in categoriesList"
             :key="key"

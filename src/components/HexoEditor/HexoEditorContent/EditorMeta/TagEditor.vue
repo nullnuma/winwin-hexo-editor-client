@@ -6,11 +6,11 @@
       style="padding-top:5px;padding-bottom:5px"
     >
       <q-item-section avatar>
-        标签
+        ラベル
       </q-item-section>
       <q-item-section>
         <q-item-label>
-          {{tags&&tags.length?'':'无'}}
+          {{tags&&tags.length?'':'なし'}}
           <q-badge
             v-for="(item,key) in tags"
             :key="key"

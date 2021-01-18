@@ -15,12 +15,12 @@
         <q-icon
           left
           name="edit"
-        /> 编辑
+        /> 編集
       </div>
     </template>
     <template v-slot:right>
       <div class="row items-center">
-        删除
+        削除
         <q-icon
           right
           name="delete"
@@ -86,7 +86,7 @@
       >
         <q-btn
           color="primary"
-          label="编辑"
+          label="編集"
           @click.stop="onBtnClick(post._id)"
           class="q-px-xs"
           size="x-small"
@@ -95,7 +95,7 @@
         />
         <q-btn
           color="red"
-          label="删除"
+          label="削除"
           @click.stop="onBtn2Click(post._id)"
           class="q-px-xs"
           size="x-small"
@@ -129,7 +129,7 @@ export default {
   computed: {
     brief () {
       const brief = this.post._whe_brief
-      return brief || '没有内容'
+      return brief || 'コンテンツなし'
     }
   },
   methods: {

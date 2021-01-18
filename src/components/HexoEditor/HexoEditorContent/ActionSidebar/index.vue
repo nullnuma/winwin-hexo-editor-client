@@ -16,27 +16,27 @@
         <q-separator style="flex: 0 0 1px" :vertical="!vertical"/>
         <action-sidebar-item
           icon="content_cut"
-          tip="剪切"
+          tip="カット"
           :direction="direction"
           @on-click="bus.$emit(EditorActionType.EDITOR_ACTION_CLIPBOARDCUTACTION)"
         />
         <action-sidebar-item
           :direction="direction"
           icon="content_copy"
-          tip="复制"
+          tip="・コピー"
           @on-click="bus.$emit(EditorActionType.EDITOR_ACTION_CLIPBOARDCOPYACTION)"
         />
         <q-separator style="flex: 0 0 1px" :vertical="!vertical"/>
         <action-sidebar-item
           :direction="direction"
-          tip="标题升级"
+          tip="段落レベル上げ"
           @on-click="bus.$emit(EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLEHEADINGUP)"
         >
           H+
         </action-sidebar-item>
         <action-sidebar-item
           :direction="direction"
-          tip="标题降级"
+          tip="段落レベル下げ"
           @on-click="bus.$emit(EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLEHEADINGDOWN)"
         >
           H-
@@ -45,38 +45,38 @@
         <action-sidebar-item
           :direction="direction"
           icon="format_bold"
-          tip="加粗"
+          tip="太字"
           @on-click="bus.$emit(EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLEBOLD)"
         />
         <action-sidebar-item
           :direction="direction"
           icon="format_italic"
-          tip="倾斜"
+          tip="斜体"
           @on-click="bus.$emit(EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLEITALIC)"
         />
         <action-sidebar-item
           :direction="direction"
           icon="format_strikethrough"
-          tip="删除线"
+          tip="打消し線"
           @on-click="bus.$emit(EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLESTRIKETHROUGH)"
         />
         <action-sidebar-item
           :direction="direction"
           icon="format_list_bulleted"
-          tip="切换各种列表"
+          tip="リスト"
           @on-click="bus.$emit(EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLELIST)"
         />
         <q-separator style="flex: 0 0 1px" :vertical="!vertical"/>
         <action-sidebar-item
           :direction="direction"
           icon="code"
-          tip="插入行内代码"
+          tip="インラインコード"
           @on-click="bus.$emit(EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLECODESPAN)"
         />
         <action-sidebar-item
           :direction="direction"
           icon="functions"
-          tip="插入行内公式"
+          tip="インライン式"
           @on-click="bus.$emit(EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLEMATH)"
         />
         <!-- <q-separator style="flex: 0 0 1px" :vertical="!vertical"/>

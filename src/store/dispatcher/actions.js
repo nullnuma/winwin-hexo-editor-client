@@ -1,4 +1,3 @@
-
 // import { date } from 'quasar'
 import * as actionTypes from './action-types'
 import { DialogService, DialogType } from 'src/service/dialog_service'
@@ -14,10 +13,10 @@ const actions = {
   [actionTypes.logout]: async ({ rootGetters, commit, dispatch }) => {
     if (!rootGetters['hexoCore/isPostSaved']) {
       const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-        message: '要退出么，未保存的文件会丢失',
-        okLabel: '退出',
+        message: '終了しますか?保存されていないファイルは失われます',
+        okLabel: '終了',
         okColor: 'red',
-        cancelLabel: '返回',
+        cancelLabel: 'キャンセル',
         cancelColor: 'primary',
         focus: 'cancel'
       })

@@ -82,7 +82,7 @@ const actions = {
       }
       article = await PostService.addArticle(Object.assign(defaultOpt, payload.options), payload.options.layout === 'page')
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '新建文章失败，请稍后再试', actionTypes.addArticleBase)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '新しい記事の作成に失敗しました．しばらくしてからもう一度お試しください', actionTypes.addArticleBase)
     }
     try {
       await dispatch(actionTypes.loadArticles)
@@ -92,7 +92,7 @@ const actions = {
       commit(mutationTypes.setLoading, false)
       return article._id
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '新文章创建成功，但数据更新失败，请手动刷新')
+      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '新しい記事は正常に作成されましたが，データの更新に失敗しました．手動で更新してください')
     }
   },
 
@@ -107,7 +107,7 @@ const actions = {
         dispatch(actionTypes.loadTags)
       ])
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '载入数据失败', actionTypes.loadAll)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, 'データの読み込みに失敗しました', actionTypes.loadAll)
     }
   },
 
@@ -121,7 +121,7 @@ const actions = {
       // TODO:如果post和page的_id重复了就会报错
       commit(mutationTypes.loadArticles, listToObject(articles))
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '文章列表获取失败，请稍后再试', actionTypes.loadArticles)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '記事リストを取得できませんでした．しばらくしてからもう一度お試しください', actionTypes.loadArticles)
     }
   },
   /**
@@ -132,7 +132,7 @@ const actions = {
       const categories = await CategoryService.getCategories()
       commit(mutationTypes.loadCategories, listToObject(categories))
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '分类获取失败，请稍后再试', actionTypes.loadCategories)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, 'カテゴリの取得に失敗しました．しばらくしてからもう一度お試しください', actionTypes.loadCategories)
     }
   },
 
@@ -144,7 +144,7 @@ const actions = {
       const tags = await TagService.getTags()
       commit(mutationTypes.loadTags, listToObject(tags))
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '标签获取失败，请稍后再试', actionTypes.loadTags)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, 'タグを取得できませんでした．しばらくしてからもう一度お試しください', actionTypes.loadTags)
     }
   },
 
@@ -162,7 +162,7 @@ const actions = {
       await PostService.saveArticle(article, isPage)
       commit(mutationTypes.saveArticle)
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '保存失败，请稍后再试', actionTypes.saveArticle)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '保存に失敗しました．しばらくしてからもう一度お試しください', actionTypes.saveArticle)
     }
   },
 
@@ -199,7 +199,7 @@ const actions = {
       const article = await PostService.getArticleById(validId, isPage)
       commit(mutationTypes.loadArticle, article)
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '文章获取失败，请稍后或刷新后再试', actionTypes.loadArticleById)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '記事を取得できませんでした．後でもう一度試すか，更新してください', actionTypes.loadArticleById)
     } finally {
     }
   },
@@ -219,13 +219,13 @@ const actions = {
       const isPage = state.data.articles[validId].layout === 'page'
       await PostService.deleteArticleById(validId, isPage)
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '删除失败，请稍后再试', actionTypes.deleteArticleById)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '削除に失敗しました．しばらくしてからもう一度お試しください', actionTypes.deleteArticleById)
     }
     try {
       await dispatch(actionTypes.loadAll)
       return validId
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '文章已删除，但数据更新失败，请手动刷新')
+      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '記事は削除されましたが，データの更新に失敗しました．手動で更新してください')
     }
   },
 
@@ -244,7 +244,7 @@ const actions = {
     try {
       post = await HexoService.publishPost(validId)
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '文章发布失败，请稍后再试', actionTypes.publishPostById)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '記事の公開に失敗しました．しばらくしてからもう一度お試しください', actionTypes.publishPostById)
     }
     try {
       await dispatch(actionTypes.loadArticles)
@@ -253,7 +253,7 @@ const actions = {
         newId: post._id
       }
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '文章已发布，但数据更新失败，请手动刷新')
+      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '記事は公開されましたが，データの更新に失敗しました．手動で更新してください')
     }
   },
 
@@ -274,7 +274,7 @@ const actions = {
       post = await HexoService.unpublishPost(validId)
       if (needReloadArticle)commit(mutationTypes.loadArticle, post)
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '取消发布失败，请稍后再试', actionTypes.unpublishPostById)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '非公開に失敗しました．しばらくしてからもう一度お試しください', actionTypes.unpublishPostById)
     }
     try {
       await dispatch(actionTypes.loadArticles)
@@ -283,7 +283,7 @@ const actions = {
         newId: post._id
       }
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '已取消发布，但数据更新失败，请手动刷新')
+      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '未公開ですが，データの更新に失敗しました．手動で更新してください')
     }
   },
 
@@ -293,7 +293,7 @@ const actions = {
       const res = await HexoService.saveGit()
       remote = res.remote
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '保存到git失败，请稍后再试', actionTypes.saveGit)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, 'Gitへの保存に失敗しました．後でもう一度やり直してください', actionTypes.saveGit)
     }
     return { remote }
   },
@@ -304,12 +304,12 @@ const actions = {
       const res = await HexoService.syncGit()
       remote = res.remote
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '从git同步失败，请稍后再试', actionTypes.syncGit)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, 'Gitからの同期に失敗しました．後でもう一度やり直してください', actionTypes.syncGit)
     }
     try {
       await dispatch(actionTypes.reload)
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '同步成功，但数据更新失败，请手动刷新')
+      throw new HexoCoreError(HexoCoreError.LOAD_ERROR, '同期は成功しましたが，データの更新に失敗しました．手動で更新してください')
     }
     return { remote }
   },
@@ -318,7 +318,7 @@ const actions = {
     try {
       await HexoService.deploy()
     } catch (err) {
-      let message = '部署失败，请稍后再试'
+      let message = '展開に失敗しました．しばらくしてからもう一度お試しください'
       if (err.code === HexoServiceError.HEXO_CANT_DEPLOY) {
         message = err.message
       }
@@ -330,7 +330,7 @@ const actions = {
     try {
       await HexoService.generate()
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '生成失败，请稍后再试', actionTypes.generate)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '生成に失敗しました．しばらくしてからもう一度お試しください', actionTypes.generate)
     }
   },
 
@@ -338,7 +338,7 @@ const actions = {
     try {
       await HexoService.clean()
     } catch (err) {
-      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, '清理失败，请稍后再试', actionTypes.clean)
+      throw new HexoCoreError(HexoCoreError.ACTION_ERROR, 'クリーンアップに失敗しました．しばらくしてからもう一度お試しください', actionTypes.clean)
     }
   }
 

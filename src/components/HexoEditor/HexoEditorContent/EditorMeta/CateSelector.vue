@@ -9,7 +9,7 @@
       :class="{'bg-blue-1':categories.length===level}"
     >
       <q-item-section :class="categories.length===level?'text-blue-3':'text-grey-5'">
-        <q-item-label>无</q-item-label>
+        <q-item-label>なし</q-item-label>
       </q-item-section>
       <q-item-section
         :class="categories.length===level?'text-blue-3':'text-grey-5'"
@@ -36,7 +36,7 @@
         <q-input
           v-model="text"
           dense
-          label="新类别"
+          label="新しいカテゴリ"
           @keydown.enter="onAddCate"
         >
         </q-input>
@@ -48,7 +48,7 @@
       @click="onAddCate"
     >
       <q-item-section>
-        <q-item-label>添加分类</q-item-label>
+        <q-item-label>カテゴリを追加</q-item-label>
       </q-item-section>
       <q-item-section avatar="">
         <q-icon name="add" />
@@ -59,7 +59,7 @@
       clickable
     >
       <q-item-section>
-        <q-item-label>添加子分类</q-item-label>
+        <q-item-label>サブカテゴリを追加</q-item-label>
       </q-item-section>
       <q-item-section avatar="">
         <q-icon name="arrow_right" />

@@ -20,7 +20,7 @@
       >
         <q-step
           :name="1"
-          title="欢迎"
+          title="ようこそ"
           icon="flag"
           :done="step > 1"
         >
@@ -32,7 +32,7 @@
 
         <q-step
           :name="2"
-          title="用户"
+          title="ユーザ"
           icon="person"
           :error="!isValid(step2) && step > 2"
           :done="step > 2"
@@ -58,7 +58,7 @@
 
         <q-step
           :name="3"
-          title="博客"
+          title="ブログ"
           icon="book"
           :error="!isValid(step3) && step > 3"
           :done="step > 2"
@@ -84,7 +84,7 @@
 
         <q-step
           :name="4"
-          title="安全"
+          title="セキュリティ"
           icon="security"
         >
           <div class="input-wrapper">
@@ -107,7 +107,7 @@
         </q-step>
         <q-step
           :name="5"
-          title="确认"
+          title="確認"
           icon="done"
         >
           <template v-if="!isAllValid">
@@ -117,12 +117,12 @@
                 size="xx-large"
                 class="q-mr-sm"
               />
-              <span>表单验证失败</span>
+              <span>検証に失敗</span>
             </div>
           </template>
           <template v-else>
             <div class="input-wrapper">
-              <div class="text-h6 q-mb-lg">以下是你的设置</div>
+              <div class="text-h6 q-mb-lg">設定の確認</div>
               <q-input
                 v-for="item in checkInfo"
                 :key="item.key"
@@ -144,7 +144,7 @@
               stretch
               @click="step === 5 ?doInstall():$refs.stepper.next()"
               color="primary"
-              :label="step === 5 ? '完成' : '下一步'"
+              :label="step === 5 ? '完了' : '次へ'"
               :disable="step === 5 && !isAllValid"
             />
             <q-btn
@@ -153,7 +153,7 @@
               flat
               color="primary"
               @click="$refs.stepper.previous()"
-              label="上一步"
+              label="前へ"
               class="q-ml-sm"
             />
           </q-stepper-navigation>
@@ -169,7 +169,7 @@
                 color="white"
               />
             </template>
-            为了安全考虑请使用和其他应用不同的密码！
+            セキュリティ上の理由から，他のアプリとは異なるパスワードを使用してください!
           </q-banner>
           <q-banner
             v-else-if="step === 5&&!isAllValid"
@@ -181,7 +181,7 @@
                 color="white"
               />
             </template>
-            检测到了一些问题，请更改后再试
+            いくつかの問題が検出されました．変更して再試行してください
           </q-banner>
         </template>
       </q-stepper>
@@ -199,7 +199,7 @@
           stretch
           color="primary"
           @click="onFinished"
-          label="开始使用"
+          label="使い始める"
         />
       </div>
     </div>
@@ -230,22 +230,22 @@ export default {
       step2: [
         {
           key: 'username',
-          label: '用户名（必填）',
+          label: 'ユーザ名(必須)',
           value: '',
-          rules: [val => !!val || '必填项']
+          rules: [val => !!val || '必須']
         },
         {
           key: 'password',
-          label: '密码（必填）',
+          label: 'パスワード(必須)',
           value: '',
-          rules: [val => !!val || '必填项']
+          rules: [val => !!val || '必須']
         }
       ],
       step3: [{
         key: 'HEXO_ROOT',
-        label: '博客相对目录（必填）',
+        label: '相対的なブログディレクトリパス(必須)',
         value: '',
-        rules: [val => !!val || '必填项']
+        rules: [val => !!val || '必須']
       }],
       step4: [
         {
@@ -296,7 +296,7 @@ export default {
       })
       try {
         Loading.show({
-          message: '正在安装'
+          message: 'インストール'
         })
         await this.$apis.install.do(data)
         Loading.hide()
@@ -307,13 +307,13 @@ export default {
           if (err.response.data.data.path) {
             this.serverHexoRoot = err.response.data.data.path
             DialogService.create(DialogType.ConfirmDialog, {
-              title: '安装尝试失败',
-              message: `请更改HEXO_ROOT\n${this.serverHexoRoot}不是有效的hexo博客`,
-              okLabel: '确定'
+              title: 'インストールに失敗しました',
+              message: `HEXO_ROOTを変更してください\n ${this.serverHexoRoot}は有効なhexoブログではありません`,
+              okLabel: 'OK'
             })
           }
         } else {
-          message.error({ message: '安装尝试失败', caption: err.message })
+          message.error({ message: 'インストールに失敗しました', caption: err.message })
         }
       }
     }

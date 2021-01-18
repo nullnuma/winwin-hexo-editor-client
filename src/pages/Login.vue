@@ -2,7 +2,7 @@
   <q-page class="bg-primary row justify-center items-center">
     <div class="column">
       <div class="row">
-        <h5 class="text-h5 text-white q-my-md">登录</h5>
+        <h5 class="text-h5 text-white q-my-md">ログイン</h5>
       </div>
       <div class="row">
         <q-card
@@ -18,11 +18,11 @@
                 clearable
                 v-model="username"
                 type="text"
-                label="用户名"
+                label="ユーザ名"
                 ref="username"
-                hint="默认: admin"
+                hint="デフォルト: admin"
                 :disable="logging"
-                :rules="[val => !!val || '请填写用户名']"
+                :rules="[val => !!val || 'ユーザ名を入力']"
                 @keydown.enter="onLogin"
               />
               <q-input
@@ -31,11 +31,11 @@
                 clearable
                 v-model="password"
                 type="password"
-                label="密码"
+                label="パスワード"
                 ref="password"
-                hint="默认: admin"
+                hint="デフォルト: admin"
                 :disable="logging"
-                :rules="[val => !!val || '请填写密码']"
+                :rules="[val => !!val || 'パスワードを入力']"
                 @keydown.enter="onLogin"
               />
             </q-form>
@@ -46,7 +46,7 @@
               color="primary"
               size="lg"
               class="full-width"
-              label="登录"
+              label="ログイン"
               :loading="logging"
               @keydown.enter="onLogin"
               @click="onLogin"
@@ -93,10 +93,10 @@ export default {
         this.$router.push('/')
       } catch (err) {
         if (err.status === 401) {
-          message.error({ message: '用户名或密码错误', position: 'top' })
+          message.error({ message: '間違ったユーザー名またはパスワード', position: 'top' })
         } else {
           message.error({
-            message: '登陆失败',
+            message: 'ログイン失敗',
             caption: err.message,
             position: 'top'
           })

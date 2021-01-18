@@ -6,7 +6,7 @@
         class="q-mb-md"
         v-model="usernameModel"
         type="text"
-        label="用户名"
+        label="ユーザー名"
         filled
       />
       <q-input
@@ -14,8 +14,8 @@
         class="q-mb-md"
         v-model="oldpassword"
         type="password"
-        label="旧密码"
-        error-message="旧密码错误"
+        label="旧パスワード"
+        error-message="旧パスワードエラー"
         :error="oldpasswordErrored"
         filled
       />
@@ -24,7 +24,7 @@
         class="q-mb-md"
         v-model="password"
         type="password"
-        label="新密码"
+        label="新パスワード"
         filled
       />
       <q-input
@@ -32,8 +32,8 @@
         class="q-mb-md"
         v-model="confirmpassword"
         type="password"
-        label="确认密码"
-        error-message="密码不一致"
+        label="パスワードの確認"
+        error-message="パスワードの不一致"
         :error="!!password&&!!confirmpassword&&(password!==confirmpassword)"
         filled
       />
@@ -76,13 +76,13 @@ export default {
       try {
         await this.$apis.settings.user.updateUserInfo(this.usernameModel, this.oldpassword, this.password)
         this.$store.dispatch('user/info')
-        message.success({ message: '保存成功' })
+        message.success({ message: '登録成功' })
       } catch (err) {
         if (err.response.status === 403) {
           this.oldpasswordErrored = true
         } else {
           this.oldpasswordErrored = false
-          message.error({ message: '保存失败', caption: err.message })
+          message.error({ message: '登録失敗', caption: err.message })
         }
       } finally {
         this.oldpassword = ''

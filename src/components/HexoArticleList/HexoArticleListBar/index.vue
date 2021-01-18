@@ -14,7 +14,7 @@
         anchor="bottom middle"
         self="center middle"
       >
-        新建文章
+        新しい記事
       </q-tooltip>
     </q-btn>
     <q-space />
@@ -32,7 +32,7 @@
         anchor="bottom middle"
         self="center middle"
       >
-        刷新文章列表
+        記事リストの更新
       </q-tooltip>
     </q-btn>
     <q-btn
@@ -57,7 +57,7 @@
         anchor="bottom middle"
         self="center middle"
       >
-        排序
+        ソート
       </q-tooltip>
       <q-menu
         anchor="bottom right"
@@ -77,7 +77,7 @@
             @click="onSortBy(item.key,item.direction)"
             :class="{'bg-blue-1':item.selected}"
           >
-            <q-item-section>按照{{item.name}}{{item.direction?'升序':'降序'}}</q-item-section>
+            <q-item-section>による(按照){{item.name}}{{item.direction?'昇順':'降順'}}</q-item-section>
             <q-item-section avatar>
               <q-icon :name="item.direction?'expand_less':'expand_more'" />
             </q-item-section>
@@ -110,8 +110,8 @@ export default {
     return {
       showSearchMenu: false,
       sortOptions: [
-        { key: sorterByTypes.TITLE, name: '标题' },
-        { key: sorterByTypes.DATE, name: '编辑日期' }
+        { key: sorterByTypes.TITLE, name: 'タイトル' },
+        { key: sorterByTypes.DATE, name: '編集日時' }
       ]
     }
   },

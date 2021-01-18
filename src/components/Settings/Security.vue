@@ -5,8 +5,8 @@
         stack-label
         class="q-mb-md"
         type="text"
-        label="用于登陆加密的密钥"
-        hint="建议：随机字符串"
+        label="暗号化に使用されるキー(JWT_SECRET)"
+        hint="提案: ランダムな値"
         v-model="JWT_SECRET"
         filled
       />
@@ -15,8 +15,8 @@
         class="q-mb-md"
         v-model.number="JWT_EXPIRE"
         type="number"
-        label="密钥过期时间(小时)"
-        hint="建议：1-3，默认：1"
+        label="キーの有効期限(時間)"
+        hint="提案: 1-3 デフォルト: 1"
         @change="onJWT_EXPIREChange(JWT_EXPIRE)"
         filled
       />
@@ -25,8 +25,8 @@
         class="q-mb-md"
         v-model.number="JWT_REFRESH"
         type="number"
-        label="密钥彻底过期的时间(天)"
-        hint="建议：5-7，默认：7"
+        label="キーが完全に有効期限切れになる時間(日)"
+        hint="提案: 5-7 デフォルト: 7"
         @change="onJWT_REFRESHChange(JWT_REFRESH)"
         filled
       />
@@ -35,8 +35,8 @@
         class="q-mb-md"
         v-model="APIKEY_SECRET"
         type="text"
-        label="用于设备授权的密钥"
-        hint="建议：随机字符串"
+        label="デバイスの認証に使用されるキー"
+        hint="提案: ランダムな値"
         filled
       />
       <q-btn
@@ -79,8 +79,8 @@ export default {
     async onSubmit () {
       if (this.changed) {
         const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-          title: '保存确认',
-          message: '你可能需要重新登陆，要继续么？'
+          title: '保存の確認',
+          message: '再度ログインする必要があるかもしれませんが続行しますか?'
         })
         if (type !== 'ok') return
         try {
@@ -91,7 +91,7 @@ export default {
             APIKEY_SECRET: this.APIKEY_SECRET
           })
         } catch (err) {
-          message.error({ message: '保存失败', caption: err.message })
+          message.error({ message: '保存失敗', caption: err.message })
         }
         await DispatcherService.destory()
         this.JWT_SECRET = ''

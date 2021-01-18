@@ -3,7 +3,7 @@
     class="full-height"
     v-if="article"
   >
-    <meta-title title="详细信息"></meta-title>
+    <meta-title title="詳細"></meta-title>
     <q-item
       dense
       v-if="isPage"
@@ -18,7 +18,7 @@
       </q-item-section>
     </q-item>
     <date-editor
-      label="发布"
+      label="公開"
       :date="article.date"
       v-if="article.published"
       @on-change="e=>$emit('on-date-update', e)"

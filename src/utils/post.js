@@ -30,7 +30,7 @@ export function getTimeStringDefault (value) {
 export function getReadableStringFromNow (value) {
   const now = new Date()
   const units = ['seconds', 'minutes', 'hours', 'days', 'months', 'years'].reverse()
-  const appends = ['秒', '分钟', '小时', '天', '个月', '年'].reverse()
+  const appends = ['秒', '分', '時間', '日', 'か月', '年'].reverse()
   let number = null
   let append
   for (let idx = 0; idx <= units.length; idx++) {
@@ -38,7 +38,7 @@ export function getReadableStringFromNow (value) {
     if (diff) {
       if (idx === units.indexOf('days') && diff >= 7) {
         number = Math.round(diff / 7)
-        append = '周'
+        append = '週間'
       } else {
         number = diff
         append = appends[idx]

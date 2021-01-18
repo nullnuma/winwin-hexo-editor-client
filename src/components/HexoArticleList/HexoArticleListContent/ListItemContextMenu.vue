@@ -21,13 +21,13 @@
         </q-item>
         <q-separator />
         <q-item v-if="date">
-          <q-item-section avatar>发布于</q-item-section>
+          <q-item-section avatar>投稿する</q-item-section>
           <q-item-section>
             {{date}}
           </q-item-section>
         </q-item>
         <q-item>
-          <q-item-section avatar>分类</q-item-section>
+          <q-item-section avatar>カテゴリ</q-item-section>
           <q-item-section>
             <div v-if="categories.length>0">
               <q-badge
@@ -39,11 +39,11 @@
                 :label="item"
               />
             </div>
-            <div v-else>无</div>
+            <div v-else>なし</div>
           </q-item-section>
         </q-item>
         <q-item>
-          <q-item-section avatar>标签</q-item-section>
+          <q-item-section avatar>ラベル</q-item-section>
           <q-item-section>
             <div v-if="tags.length>0">
               <q-badge
@@ -55,7 +55,7 @@
                 :label="item"
               />
             </div>
-            <div v-else>无</div>
+            <div v-else>なし</div>
           </q-item-section>
         </q-item>
       </q-list>
@@ -69,14 +69,14 @@
           v-close-popup
           @click="onView"
         >
-          <q-item-section>查看</q-item-section>
+          <q-item-section>ビュー</q-item-section>
         </q-item>
         <q-item
           clickable
           v-close-popup
           @click="onEdit"
         >
-          <q-item-section>编辑</q-item-section>
+          <q-item-section>編集</q-item-section>
         </q-item>
         <q-item
           clickable
@@ -84,7 +84,7 @@
           @click="onPublish"
           :class="{'text-red':published}"
         >
-          <q-item-section>{{published?'取消发布':'发布'}}</q-item-section>
+          <q-item-section>{{published?'非公開':'公開'}}</q-item-section>
         </q-item>
         <q-separator />
         <q-item
@@ -93,7 +93,7 @@
           class="text-red"
           @click="onDelete"
         >
-          <q-item-section>删除</q-item-section>
+          <q-item-section>削除</q-item-section>
         </q-item>
         <q-separator />
         <q-item
@@ -101,7 +101,7 @@
           v-close-popup
           class="text-grey"
         >
-          <q-item-section>关闭菜单</q-item-section>
+          <q-item-section>閉じる</q-item-section>
         </q-item>
       </q-list>
     </template>
@@ -114,7 +114,7 @@
           @click="onAdd"
           style="user-select:none"
         >
-          <q-item-section>新建一篇文章？</q-item-section>
+          <q-item-section>新しい記事の作成?</q-item-section>
           <q-item-section avatar>
             <q-icon
               color="primary"
@@ -129,7 +129,7 @@
           dense
           class="text-grey"
         >
-          <q-item-section>点错了</q-item-section>
+          <q-item-section>閉じる(点错了)</q-item-section>
         </q-item>
       </q-list>
     </template>

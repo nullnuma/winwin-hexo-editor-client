@@ -32,7 +32,7 @@
             anchor="bottom middle"
             self="center middle"
           >
-            设置
+            設定へ
           </q-tooltip>
         </q-btn>
         <q-btn
@@ -49,7 +49,7 @@
             anchor="bottom middle"
             self="center middle"
           >
-            编辑博客
+            ブログへ
           </q-tooltip>
         </q-btn>
         <q-btn
@@ -66,7 +66,7 @@
             anchor="bottom middle"
             self="center middle"
           >
-            退出
+            ログアウト
           </q-tooltip>
         </q-btn>
       </q-toolbar>
@@ -110,8 +110,8 @@ export default {
   methods: {
     async onLogout () {
       const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-        title: '退出确认',
-        message: '确定要退出么?'
+        title: 'ログアウト',
+        message: 'ログアウトしますか?'
       })
       if (type === 'ok') {
         await this.$store.dispatch('logout')

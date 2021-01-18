@@ -1,13 +1,13 @@
 <template>
   <div class="q-pa-lg fit">
     <div style="max-width:400px">
-      <div class="text-h6">编辑器工具栏样式</div>
+      <div class="text-h6">エディターのツールバースタイル</div>
       <div class="q-gutter-md q-pa-md">
         <q-radio
           dense
           v-model="direction"
           val="vertical"
-          label="竖直"
+          label="垂直"
         />
         <q-radio
           dense
@@ -74,7 +74,7 @@ export default {
         await DispatcherService.saveUiConfig()
         message.success({ message: '保存成功' })
       } catch (err) {
-        message.error({ message: '保存失败', caption: err.message })
+        message.error({ message: '保存失敗', caption: err.message })
       }
     }
   }

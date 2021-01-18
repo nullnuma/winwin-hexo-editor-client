@@ -12,7 +12,7 @@
         class="text-blue"
         @click="deploy"
       >
-        <q-item-section style="margin-left:-2px;">部署</q-item-section>
+        <q-item-section style="margin-left:-2px;">デプロイ</q-item-section>
         <q-item-section avatar>
           <q-icon name="local_airport" />
         </q-item-section>
@@ -33,7 +33,7 @@
           class="text-blue"
           @click="clean"
         >
-          <q-item-section style="margin-left:-2px;">清理</q-item-section>
+          <q-item-section style="margin-left:-2px;">クリーン</q-item-section>
           <q-item-section avatar>
             <q-icon name="toys" />
           </q-item-section>
@@ -44,7 +44,7 @@
         class="text-blue"
         @click="saveGit"
       >
-        <q-item-section style="margin-left:-2px;">同步到GIT</q-item-section>
+        <q-item-section style="margin-left:-2px;">Gitに同期(Push)</q-item-section>
         <q-item-section avatar>
           <q-icon name="flight_takeoff" />
         </q-item-section>
@@ -55,7 +55,7 @@
           class="text-red"
           @click="syncGit"
         >
-          <q-item-section style="margin-left:-2px;">从GIT同步</q-item-section>
+          <q-item-section style="margin-left:-2px;">Gitから同期(Pull)</q-item-section>
           <q-item-section avatar>
             <q-icon name="flight_land" />
           </q-item-section>
@@ -66,7 +66,7 @@
         class="text-grey"
         @click="showMore=!showMore"
       >
-        <q-item-section>{{showMore?'更少':'更多'}}</q-item-section>
+        <q-item-section>{{showMore?'少なく':'もっと'}}</q-item-section>
         <q-item-section avatar>
           <q-icon :name="showMore?'keyboard_arrow_up':'keyboard_arrow_down'" />
         </q-item-section>
@@ -83,19 +83,19 @@
           class="q-py-xs"
         >
           <category-item
-            label="全部"
+            label="すべて"
             :badge="articleCount"
             @on-click="filterByAll"
             :selected="selectedAll"
           ></category-item>
           <category-item
-            label="文章"
+            label="公開記事"
             :badge="postsCount"
             @on-click="filterByPost"
             :selected="selectedPost"
           ></category-item>
           <category-item
-            label="草稿"
+            label="下書き"
             :badge="draftsCount"
             @on-click="filterByDraft"
             :selected="selectedDraft"
@@ -107,7 +107,7 @@
             />
           </category-item>
           <category-item
-            label="页面"
+            label="ページ"
             :badge="pagesCount"
             @on-click="filterByPages"
             :selected="selectedPages"
@@ -128,7 +128,7 @@
             @on-click="filterByCategoriesId"
           ></category-tree>
           <category-item
-            label="未分类"
+            label="未分類"
             :badge="unCategoriesCount"
             @on-click="filterByUnCategorized"
             :selected="selectedUncategoriezed"

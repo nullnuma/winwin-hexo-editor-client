@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     dateString () {
-      if (!this.date) return '无数据'
+      if (!this.date) return '日付なし'
       return date.formatDate(new Date(this.date), 'YYYY年MM月DD日 HH:mm')
     }
   },

@@ -81,7 +81,7 @@ request.interceptors.response.use((res) => {
         err.config.url = err.config.url.slice(err.config.baseURL.length)
         return request(err.config)
       }
-      err.message = '用户名或密码错误'
+      err.message = '間違ったユーザー名またはパスワード'
     }
   }
   return Promise.reject(err)

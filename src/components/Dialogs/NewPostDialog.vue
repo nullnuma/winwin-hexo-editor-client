@@ -5,7 +5,7 @@
   >
     <q-card class="q-dialog-plugin">
       <q-card-section>
-        <div class="text-h6">新建{{isPage?'页面':'文章'}}</div>
+        <div class="text-h6">新しい{{isPage?'ページ':'記事'}}</div>
       </q-card-section>
       <q-separator />
       <q-card-section>
@@ -31,7 +31,7 @@
           <q-input
             v-model="path"
             type="text"
-            label="path（必填且不可更改）"
+            label="path（必須 変更不可）"
             ref="path"
             stack-label
             @keyup="path=path.trimLeft()"
@@ -39,13 +39,13 @@
         </template>
         <q-toggle
           v-model="isPage"
-          :label="isPage?'新页面':'新文章'"
+          :label="isPage?'新しいページ':'新しい記事'"
           left-label
         />
         <template v-if="!isPage">
           <q-toggle
             v-model="useRandomSlug"
-            :label="useRandomSlug?'随机slug':'默认slug'"
+            :label="useRandomSlug?'ランダムなslug':'デフォルトのslug'"
             left-label
           />
         </template>
@@ -55,7 +55,7 @@
       <q-card-actions align="right">
         <q-btn
           color="primary"
-          label="新建"
+          label="新規"
           @click="onOKClick"
           flat
           :disable="!valideOptions"
@@ -108,13 +108,13 @@ export default {
       return false
     },
     titleLabel () {
-      let str = '标题'
-      if (this.isPage)str += '（可选）'
-      else if (this.useRandomSlug)str += '（可选）'
+      let str = 'タイトル'
+      if (this.isPage)str += '（オプション）'
+      else if (this.useRandomSlug)str += '（オプション）'
       return str
     },
     slugLabel () {
-      return `slug${this.useRandomSlug ? '' : '（可选）'}`
+      return `slug${this.useRandomSlug ? '' : '（オプション）'}`
     }
   },
   methods: {

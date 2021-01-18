@@ -14,7 +14,7 @@
         anchor="bottom middle"
         self="center middle"
       >
-        {{isFullscreen?'退出网页全屏':'网页全屏'}}
+        {{isFullscreen?'全画面表示の終了':'全画面表示'}}
       </q-tooltip>
     </q-btn>
     <q-btn
@@ -32,7 +32,7 @@
         anchor="bottom middle"
         self="center middle"
       >
-        {{published?'取消发布':'发布'}}
+        {{published?'非公開':'公開'}}
       </q-tooltip>
     </q-btn>
     <q-btn
@@ -48,7 +48,7 @@
         transition-hide="none"
         anchor="bottom middle"
         self="center middle"
-      >删除
+      >削除
       </q-tooltip>
     </q-btn>
     <q-badge
@@ -85,7 +85,7 @@ export default {
   computed: {
     lastSavedAt () {
       if (!this.rawLastSavedAt) return null
-      return '最后保存于 ' + date.formatDate(new Date(this.rawLastSavedAt), 'HH:mm:ss')
+      return '最後に保存した ' + date.formatDate(new Date(this.rawLastSavedAt), 'HH:mm:ss')
     },
     toolbarStyle () {
       return {

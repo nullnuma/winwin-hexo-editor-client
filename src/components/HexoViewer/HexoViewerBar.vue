@@ -18,7 +18,7 @@
         anchor="bottom middle"
         self="center middle"
       >
-        {{isFullscreen?'退出网页全屏':'网页全屏'}}
+        {{isFullscreen?'全画面の終了':'全画面表示'}}
       </q-tooltip>
     </q-btn>
     <q-btn
@@ -36,7 +36,7 @@
         anchor="bottom middle"
         self="center middle"
       >
-        {{published?'取消发布':'发布'}}
+        {{published?'非公開':'公海'}}
       </q-tooltip>
     </q-btn>
     <q-btn
@@ -52,7 +52,7 @@
         transition-hide="none"
         anchor="bottom middle"
         self="center middle"
-      >编辑
+      >編集
       </q-tooltip>
     </q-btn>
     <q-btn
@@ -68,7 +68,7 @@
         transition-hide="none"
         anchor="bottom middle"
         self="center middle"
-      >删除
+      >削除
       </q-tooltip>
     </q-btn>
     <template v-if="!isPage">
@@ -78,8 +78,8 @@
         @click="editPostById"
       >
         <span style="white-space:nowrap">
-          分类：
-          {{categories.length?'':'无'}}
+          カテゴリ：
+          {{categories.length?'':'なし'}}
           <q-badge
             v-for="(item,key) in categories"
             :key="key"
@@ -95,8 +95,8 @@
         @click="editPostById"
       >
         <span style="white-space:nowrap">
-          标签：
-          {{tags.length?'':'无'}}
+          ラベル：
+          {{tags.length?'':'なし'}}
           <q-badge
             v-for="(item,key) in tags"
             :key="key"

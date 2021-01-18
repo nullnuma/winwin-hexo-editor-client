@@ -57,7 +57,7 @@
       @click="onAdd"
     >
       <q-item-section>
-        <q-item-label>添加</q-item-label>
+        <q-item-label>追加</q-item-label>
       </q-item-section>
       <q-item-section avatar="">
         <q-icon name="add" size="small"/>
@@ -69,20 +69,20 @@
     >
       <q-card style="min-width:500px">
         <q-card-section class="q-pb-none">
-          <div class="text-h6">修改Frontmatter - {{tmpKey}}</div>
+          <div class="text-h6">変更 Frontmatter - {{tmpKey}}</div>
         </q-card-section>
         <q-card-section class="column items-center q-pt-sm">
           <q-input
             class="col full-width"
             v-model="currentKey"
             type="text"
-            label="键（字符串）"
+            label="キー (文字列)"
           />
           <q-input
             class="col full-width"
             v-model="currentValue"
             type="text"
-            label="值（JSON格式）"
+            label="値 (JSON形式)"
           />
         </q-card-section>
         <q-separator />
@@ -95,7 +95,7 @@
           />
           <q-btn
             flat
-            label="完成"
+            label="保存"
             color="primary"
             @click="onSave"
           />
@@ -125,8 +125,8 @@ export default {
       currentValue: null,
       columns: [
         { name: 'action', label: '操作', align: 'center' },
-        { name: 'key', label: '键', field: row => row.key, align: 'left' },
-        { name: 'value', label: '值', field: row => row.value, align: 'left' }
+        { name: 'key', label: 'キー', field: row => row.key, align: 'left' },
+        { name: 'value', label: '値', field: row => row.value, align: 'left' }
       ]
     }
   },
@@ -189,7 +189,7 @@ export default {
         await this.updateFrontmatters({ [this.currentKey]: JSON.parse(this.currentValue) })
         this.onCancel()
       } catch (_) {
-        message.error({ message: '格式化失败', caption: '请检查【值】是否符合JSON格式', position: 'center', timeout: '1000' })
+        message.error({ message: 'フォーマットの失敗', caption: '【値】がJSON形式に準拠しているか確認して下さい', position: 'center', timeout: '1000' })
       }
     }
   }
