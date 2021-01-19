@@ -130,6 +130,10 @@ module.exports = function (ctx) {
           pathRewrite: {
             '^/api': ''
           }
+        },
+        '/imagemgr': {
+          target: 'http://localhost:5777/',
+          changeOrigin: true
         }
       },
       https: false,

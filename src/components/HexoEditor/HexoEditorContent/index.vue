@@ -77,6 +77,9 @@
       @on-date-update="updateDate"
       @on-updated-update="updateUpdated"
     ></editor-meta>
+    <image-manager
+      :bus="bus"
+    ></image-manager>
   </div>
   <div v-else>
     Internal Error: article is required
@@ -91,6 +94,7 @@ import EditorMeta from './EditorMeta'
 import ActionSidebar from './ActionSidebar'
 import { DirectionType } from './types'
 import { UserConfigGettersType } from 'src/store/user_config'
+import ImageManager from './ImageManager'
 export default {
   name: 'HexoEditor',
   props: {
@@ -102,7 +106,8 @@ export default {
   components: {
     MonacoEditor,
     EditorMeta,
-    ActionSidebar
+    ActionSidebar,
+    ImageManager
   },
   data () {
     return {

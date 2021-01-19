@@ -46,15 +46,15 @@ DialogService.registerDialog(DialogType.NewPostDialog, (opt, resolve) => {
 DialogService.registerDialog(DialogType.ConfirmDialog, (opt, resolve) => {
   // ensure options
   const config = {
-    title: opt.title || '确认',
+    title: opt.title || '確認',
     message: opt.message,
     ok: {
-      label: opt.okLabel || '确定',
+      label: opt.okLabel || '確定',
       color: opt.okColor || 'primary',
       flat: true
     },
     cancel: {
-      label: opt.cancelLabel || '返回',
+      label: opt.cancelLabel || 'キャンセル',
       color: opt.cancelColor || 'grey',
       flat: true
     },

@@ -114,10 +114,10 @@ class DispatcherService {
     try {
       if (requestSave) {
         const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-          message: '要退出么，未保存的文件会丢失',
-          okLabel: '退出',
+          message: '終了しますか?保存されていないファイルは失われます',
+          okLabel: '終了',
           okColor: 'red',
-          cancelLabel: '返回',
+          cancelLabel: 'キャンセル',
           cancelColor: 'primary',
           focus: 'cancel'
         })
@@ -148,10 +148,10 @@ class DispatcherService {
     try {
       if (!this.getters['hexoCore/isPostSaved']) {
         const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-          message: '要离开么，未保存的文件会丢失',
-          okLabel: '离开',
+          message: '保存しますか?保存されていないファイルは失われます',
+          okLabel: '保存',
           okColor: 'red',
-          cancelLabel: '返回',
+          cancelLabel: 'キャンセル',
           cancelColor: 'primary',
           focus: 'cancel'
         })
@@ -172,19 +172,19 @@ class DispatcherService {
       if (process.env.DEV)logger.warn(err)
       if (err.status === 401) return
       if (err.name === 'AsyncRaceAbort') return
-      this.message.error({ message: '新建失败', caption: err.message })
+      this.message.error({ message: '作成に失敗した', caption: err.message })
     }
   }
 
   async deletePostById (_id) {
     const post = this.state.hexoCore.data.articles[_id || this.state.hexoCore.data.article._id]
-    const message = `你确认要删除《${post.title}》么？`
+    const message = `《${post.title}》を削除してもいいですか?`
     // if (post.date)message += `（最后编辑于${date.formatDate(post.date, 'YYYY年MM月DD日 HH:mm:ss')}）`
 
     const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-      title: '删除确认',
+      title: '削除の確認',
       message,
-      okLabel: '删除',
+      okLabel: '削除',
       okColor: 'red',
       cancelColor: 'primary',
       focus: 'cancel'
@@ -196,7 +196,7 @@ class DispatcherService {
       if (deletedId === this.route.params.id && this.route.path !== '/home') { this.router.push('/home') }
     } catch (err) {
       if (err.name === 'AsyncRaceAbort') return
-      this.message.error({ message: '删除失败', caption: err.message })
+      this.message.error({ message: '削除失敗', caption: err.message })
     }
   }
 
@@ -212,10 +212,10 @@ class DispatcherService {
     try {
       if (requestSave) {
         const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-          message: '要退出么，未保存的文件会丢失',
-          okLabel: '退出',
+          message: '終了しますか?保存されていないファイルは失われます',
+          okLabel: '終了',
           okColor: 'red',
-          cancelLabel: '返回',
+          cancelLabel: 'キャンセル',
           cancelColor: 'primary',
           focus: 'cancel'
         })
@@ -247,10 +247,10 @@ class DispatcherService {
     try {
       if (!force && !this.getters['hexoCore/isPostSaved']) {
         const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-          message: '要退出么，未保存的文件会丢失',
-          okLabel: '退出',
+          message: '終了しますか?保存されていないファイルは失われます',
+          okLabel: '終了',
           okColor: 'red',
-          cancelLabel: '返回',
+          cancelLabel: 'キャンセル',
           cancelColor: 'primary',
           focus: 'cancel'
         })
@@ -269,7 +269,7 @@ class DispatcherService {
       }
     } catch (err) {
       if (err.name === 'AsyncRaceAbort') return
-      message.error({ message: '发布失败', caption: err.message })
+      message.error({ message: '公開に失敗しました', caption: err.message })
     }
   }
 
@@ -278,10 +278,10 @@ class DispatcherService {
     try {
       if (!force && !this.getters['hexoCore/isPostSaved']) {
         const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-          message: '你确认要取消发布么？未保存的文件会丢失',
-          okLabel: '继续取消发布',
+          message: '非公開にしますか?保存されていないファイルは失われます',
+          okLabel: '非公開にする',
           okColor: 'red',
-          cancelLabel: '返回',
+          cancelLabel: 'キャンセル',
           cancelColor: 'primary',
           focus: 'cancel'
         })
@@ -289,8 +289,8 @@ class DispatcherService {
         this.publishPostById(_id, true)
       } else {
         const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-          message: '你确认要取消发布么？取消后无法撤销，再次发布的文章地址也会变更',
-          okLabel: '取消发布',
+          message: '非公開にしますか?キャンセル後は元に戻せず、再発行された記事のアドレスも変更されます',
+          okLabel: '非公開にする',
           okColor: 'red',
           cancelColor: 'primary',
           focus: 'cancel'
@@ -308,7 +308,7 @@ class DispatcherService {
       }
     } catch (err) {
       if (err.name === 'AsyncRaceAbort') return
-      message.error({ message: '发布失败', caption: err.message })
+      message.error({ message: '公開に失敗', caption: err.message })
     }
   }
 
@@ -328,15 +328,15 @@ class DispatcherService {
       return
     }
     try {
-      if (!isAuto) this.commit('hexoUi/showLoading', { message: '正在保存', delay: 100 })
+      if (!isAuto) this.commit('hexoUi/showLoading', { message: '保存', delay: 100 })
       await this.dispatch('hexoCore/' + hexoCoreActionTypes.saveArticle)
       if (!isAuto) message.success({ message: '保存成功' })
     } catch (err) {
       if (err.status === 404) {
-        err.message = '列表已更新，请刷新'
+        err.message = 'リストが更新されました．更新してください'
       }
       if (err.name === 'AsyncRaceAbort') return
-      message.error({ message: '保存失败', caption: err.message })
+      message.error({ message: '保存失敗', caption: err.message })
     } finally {
       this.commit('hexoUi/hideLoading')
     }
@@ -346,17 +346,17 @@ class DispatcherService {
   // #region hexo actions
   async deploy () {
     const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-      message: '确定部署博客么？',
+      message: 'ブログをデプロイしますか?',
       focus: 'ok'
     })
     if (type !== 'ok') return
     try {
-      this.commit('hexoUi/showLoading', { message: '正在部署', delay: 100 })
+      this.commit('hexoUi/showLoading', { message: 'デプロイ', delay: 100 })
       await this.dispatch('hexoCore/' + hexoCoreActionTypes.deploy)
-      message.success({ message: '部署完成' })
+      message.success({ message: 'デプロイが完了しました' })
     } catch (err) {
       if (err.name === 'AsyncRaceAbort') return
-      message.error({ message: '部署失败', caption: err.message })
+      message.error({ message: 'デプロイに失敗しました', caption: err.message })
     } finally {
       this.commit('hexoUi/hideLoading')
     }
@@ -364,12 +364,12 @@ class DispatcherService {
 
   async generate () {
     try {
-      this.commit('hexoUi/showLoading', { message: '正在生成', delay: 100 })
+      this.commit('hexoUi/showLoading', { message: '生成', delay: 100 })
       await this.dispatch('hexoCore/' + hexoCoreActionTypes.generate)
-      message.success({ message: '生成完成' })
+      message.success({ message: '生成しました' })
     } catch (err) {
       if (err.name === 'AsyncRaceAbort') return
-      message.error({ message: '生成失败', caption: err.message })
+      message.error({ message: '生成に失敗しました', caption: err.message })
     } finally {
       this.commit('hexoUi/hideLoading')
     }
@@ -377,12 +377,12 @@ class DispatcherService {
 
   async clean () {
     try {
-      this.commit('hexoUi/showLoading', { message: '正在清理', delay: 100 })
+      this.commit('hexoUi/showLoading', { message: 'クリーン', delay: 100 })
       await this.dispatch('hexoCore/' + hexoCoreActionTypes.clean)
-      message.success({ message: '清理完成' })
+      message.success({ message: 'クリーンに成功しました' })
     } catch (err) {
       if (err.name === 'AsyncRaceAbort') return
-      message.error({ message: '清理失败', caption: err.message })
+      message.error({ message: 'クリーンに失敗しました', caption: err.message })
     } finally {
       this.commit('hexoUi/hideLoading')
     }
@@ -392,18 +392,18 @@ class DispatcherService {
   // #region git actions
   async syncGit () {
     const { type } = await DialogService.create(DialogType.ConfirmDialog, {
-      message: '确定从git同步么？未保存到git的文件将丢失',
-      okLabel: '放弃文件并同步',
+      message: 'Gitから同期してもいいですか? Gitに保存されていないファイルは失われます',
+      okLabel: 'ファイルを破棄し同期',
       okColor: 'red',
-      cancelLabel: '返回',
+      cancelLabel: 'キャンセル',
       cancelColor: 'primary',
       focus: 'cancel'
     })
     if (type !== 'ok') return
     try {
-      this.commit('hexoUi/showLoading', { message: '正在从GIT同步', delay: 100 })
+      this.commit('hexoUi/showLoading', { message: 'Gitから同期', delay: 100 })
       const { remote } = await this.dispatch('hexoCore/' + hexoCoreActionTypes.syncGit)
-      message.success({ message: remote ? '同步完成' : '仓库重置完成', caption: remote ? '' : '未配置远端仓库，无法从远端同步' })
+      message.success({ message: remote ? '同期が完了しました' : 'リセットが完了しました', caption: remote ? '' : 'リモートが構成されていないので同期できません' })
       const name = this.route.name
       if (name === 'view_article') {
         await this.viewPostById(this.route.params.id, true)
@@ -412,7 +412,7 @@ class DispatcherService {
       }
     } catch (err) {
       if (err.name === 'AsyncRaceAbort') return
-      message.error({ message: '同步失败', caption: err.message })
+      message.error({ message: '同期失敗', caption: err.message })
     } finally {
       this.commit('hexoUi/hideLoading')
     }
@@ -420,12 +420,12 @@ class DispatcherService {
 
   async saveGit () {
     try {
-      this.commit('hexoUi/showLoading', { message: '正在同步到GIT', delay: 100 })
+      this.commit('hexoUi/showLoading', { message: 'Gitへ同期', delay: 100 })
       const { remote } = await this.dispatch('hexoCore/' + hexoCoreActionTypes.saveGit)
-      message.success({ message: remote ? '同步完成' : '仓库提交完成', caption: remote ? '' : '未配置远端仓库，无法同步到远端' })
+      message.success({ message: remote ? '同期が完了しました' : 'リモートにプッシュしました', caption: remote ? '' : 'リモートが構成されていないので同期できません' })
     } catch (err) {
       if (err.name === 'AsyncRaceAbort') return
-      message.error({ message: '同步失败', caption: err.message })
+      message.error({ message: '同期失敗', caption: err.message })
     } finally {
       this.commit('hexoUi/hideLoading')
     }

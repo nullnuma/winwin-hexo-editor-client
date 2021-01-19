@@ -3,7 +3,7 @@
     v-if="article"
       class="fit"
       :title="article.title"
-      :content="article._content"
+      :content="convImgAssetURL(article._content)"
       @on-edit="editPostById"
     ></markdown-previewer>
 </template>
@@ -37,6 +37,9 @@ export default {
     },
     getDateString (d) {
       return date.formatDate(d, 'YYYY年MM月DD日 HH:mm:ss')
+    },
+    convImgAssetURL (contents) {
+      return this.article._content.replace(/(?:!\[(.*?)\]\(\/assets(.*?)\))/g, '![$1](http://localhost:5777/imagemgr/data$2)')
     }
   }
 }
