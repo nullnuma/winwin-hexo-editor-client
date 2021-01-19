@@ -36,7 +36,7 @@ export class HexoService {
       await hexo.deploy()
     } catch (err) {
       if (err.response && err.response.status === 503) {
-        throw new HexoServiceError(HexoServiceError.HEXO_CANT_DEPLOY, '请配置`hexo deploy`命令')
+        throw new HexoServiceError(HexoServiceError.HEXO_CANT_DEPLOY, '`hexo deploy`コマンドを設定してください')
       }
       throw err
     }

@@ -54,7 +54,7 @@ import 'monaco-editor/esm/vs/basic-languages/monaco.contribution'
 // import 'monaco-editor/esm/vs/basic-languages/markdown/markdown.contribution'
 import myTheme from './theme'
 import * as MonacoMarkdown from 'monaco-markdown'
-import { EditorActionType } from './utils'
+import { EditorActionType, ImageManagerActionType } from './utils'
 import ContextMenu from './ContextMenu'
 export default {
   name: 'MonacoEditor',
@@ -172,6 +172,7 @@ export default {
       // Method that will be executed when the action is triggered.
       // @param editor The editor instance is passed in as a convinience
       run: (editor) => {
+        console.log('toggle preview')
         this.$emit('on-toggle-preview')
         return null
       }
@@ -222,6 +223,13 @@ export default {
         editor.trigger('source', EditorActionType[key])
       })
     })
+    this.bus.$on(ImageManagerActionType.IMAGEMANAGER_INSERT_IMAGE, (text) => {
+      console.log(ImageManagerActionType.IMAGEMANAGER_INSERT_IMAGE, text)
+      var id = { major: 1, minor: 1 }
+      var op = { identifier: id, range: editor.getSelection(), text: text, forceMoveMarkers: true }
+      editor.executeEdits('source', [op])
+    })
+    console.log(editor.getActions())
   },
   methods: {
     layout () {

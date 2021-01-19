@@ -85,7 +85,7 @@
             :key="key"
             color="primary"
             text-color="white"
-            :label="item"
+            :label="item[0]"
           />
         </span>
       </q-btn>
@@ -102,7 +102,7 @@
             :key="key"
             color="primary"
             text-color="white"
-            :label="item"
+            :label="item[0]"
           />
         </span>
       </q-btn>

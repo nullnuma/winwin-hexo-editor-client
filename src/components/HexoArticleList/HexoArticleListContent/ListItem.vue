@@ -71,11 +71,11 @@
           caption
         >
           <q-badge
-            v-for="tag in post.tags"
-            :key="tag"
+            v-for="(tag, index) in post.tags"
+            :key="index"
             :color="selected?'primary':'grey-3'"
             :text-color="selected?'white':'grey'"
-            :label="tag"
+            :label="tag[0]"
             class="itemtag"
           />
         </q-item-label>

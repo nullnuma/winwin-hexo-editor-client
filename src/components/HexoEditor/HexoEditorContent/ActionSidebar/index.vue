@@ -79,6 +79,13 @@
           tip="インライン式"
           @on-click="bus.$emit(EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLEMATH)"
         />
+        <q-separator style="flex: 0 0 1px" :vertical="!vertical"/>
+        <action-sidebar-item
+          :direction="direction"
+          icon="image"
+          tip="画像"
+          @on-click="bus.$emit(ImageManagerActionType.IMAGEMANAGER_OPEN)"
+        />
         <!-- <q-separator style="flex: 0 0 1px" :vertical="!vertical"/>
         <action-sidebar-item
           :direction="direction"
@@ -92,8 +99,9 @@
 </template>
 <script>
 import ActionSidebarItem from './ActionSidebarItem'
-import { EditorActionType } from '../MonacoEditor/utils'
+import { EditorActionType, ImageManagerActionType } from '../MonacoEditor/utils'
 import { DirectionType } from '../types'
+
 export default {
   name: 'ActionSidebar',
   components: {
@@ -112,7 +120,8 @@ export default {
   },
   data () {
     return {
-      EditorActionType
+      EditorActionType,
+      ImageManagerActionType
     }
   },
   computed: {

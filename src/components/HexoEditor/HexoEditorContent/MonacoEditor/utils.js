@@ -19,3 +19,8 @@ EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLELIST = 'markdown.extension.edi
 EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLECODESPAN = 'markdown.extension.editing.toggleCodeSpan'
 EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLEMATH = 'markdown.extension.editing.toggleMath'
 EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLEMATHREVERSE = 'markdown.extension.editing.toggleMathReverse'
+
+export class ImageManagerActionType {}
+
+ImageManagerActionType.IMAGEMANAGER_OPEN = 'imagemanager.open'
+ImageManagerActionType.IMAGEMANAGER_INSERT_IMAGE = 'imagemanager.insertimage'
