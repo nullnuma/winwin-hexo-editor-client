@@ -164,7 +164,6 @@ export default {
     },
 
     showInfo (url) {
-      console.log(url)
       this.bus.$emit(ImageManagerActionType.IMAGEMANAGER_IMAGE_EDIT, url)
     },
 
