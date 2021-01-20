@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.7031e2d4367bb2fc997875ddf7bd93f3.js"
+  "precache-manifest.cb70c4295191f4f6663bdb9347c37249.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "@winwin/hexo-editor-client"});
