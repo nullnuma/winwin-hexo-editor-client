@@ -39,7 +39,7 @@ export default {
       return date.formatDate(d, 'YYYY年MM月DD日 HH:mm:ss')
     },
     convImgAssetURL (contents) {
-      return this.article._content.replace(/(?:!\[(.*?)\]\(\/assets(.*?)\))/g, '![$1](http://localhost:5777/imagemgr/data$2)')
+      return this.article._content.replace(/(?:!\[(.*?)\]\(\/assets(.*?)\))/g, '![$1](/imagemgr/data$2)')
     }
   }
 }
