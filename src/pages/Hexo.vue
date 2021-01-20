@@ -96,7 +96,7 @@ export default {
     }
   },
   created () {
-    document.getElementById('app-message').innerHTML = '加载编辑器...'
+    document.getElementById('app-message').innerHTML = 'エディタのロード...'
   },
   async beforeDestory () {
     DispatcherService.destory()

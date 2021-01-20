@@ -23,4 +23,6 @@ EditorActionType.MARKDOWN_EXTENSION_EDITING_TOGGLEMATHREVERSE = 'markdown.extens
 export class ImageManagerActionType {}
 
 ImageManagerActionType.IMAGEMANAGER_OPEN = 'imagemanager.open'
+ImageManagerActionType.IMAGEMANAGER_LIST_RELOAD = 'imagemanager.listreload'
 ImageManagerActionType.IMAGEMANAGER_INSERT_IMAGE = 'imagemanager.insertimage'
+ImageManagerActionType.IMAGEMANAGER_IMAGE_EDIT = 'imagemanager.imageedit'

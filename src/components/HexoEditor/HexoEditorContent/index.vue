@@ -79,6 +79,7 @@
     ></editor-meta>
     <image-manager
       :bus="bus"
+      :article="article"
     ></image-manager>
   </div>
   <div v-else>

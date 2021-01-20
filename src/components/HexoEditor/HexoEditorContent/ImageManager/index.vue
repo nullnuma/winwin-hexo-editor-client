@@ -9,7 +9,7 @@
       <q-card-section class="row items-center q-pb-none">
           <div class="text-h6">イメージの追加</div>
           <q-space />
-          <q-btn icon="sync" flat round dense @click="reloadDirList"/>
+          <q-btn icon="sync" flat round dense @click="reload"/>
         </q-card-section>
       <q-separator />
       <q-card-section>
@@ -18,19 +18,35 @@
             <div class="col-4">
               <div class="q-pa-md">
                 <div class="row">
-                  <div class="text-h6" v-if="selecturl === ''">Please Select</div>
-                  <div class="text-h6" v-else>{{selecturl}}</div>
+                  <div class="text-h6">{{selecturl}}</div>
                   <q-space />
-                  <q-btn icon="sync" flat round dense @click="reloadDirList"/>
+                  <q-btn icon="sync" flat round dense @click="reload"/>
                 </div>
                 <div class="row">
-                  <q-scroll-area style="min-height: 450px;" class="col-12">
+                  <q-scroll-area style="min-height: 350px;" class="col-12">
                     <q-tree
                       :nodes="dirlist"
                       node-key="label"
                       :expanded.sync="expanded"
+                      selected-color="primary"
+                      :selected.sync="selected"
                     />
                   </q-scroll-area>
+                </div>
+                <div class="row">
+                  <q-uploader
+                    url="http://localhost:5777/imagemgr/upload"
+                    label="画像のアップロード"
+                    color="teal"
+                    square
+                    flat
+                    bordered
+                    multiple
+                    accept=".jpg, image/*, .heic"
+                    :headers="[{name: 'slug', value: selecturl}]"
+                    @uploaded="reload"
+                    class="col-12"
+                  />
                 </div>
               </div>
             </div>
@@ -45,8 +61,20 @@
                   @click="switchSelect(item)"
                 >
                   <div class="absolute-bottom text-subtitle1 text-center" v-if="selectlist.indexOf(item) >= 0">
-                    Select
+                    選択
                   </div>
+                  <q-icon class="absolute all-pointer-events" size="32px" name="info" color="white" style="top: 8px; left: 8px" @click.stop="showInfo(item)">
+                    <q-tooltip>
+                      クリックして編集
+                      <br>
+                      {{item.match(/([^/]*)\./)[1] + '.' + item.match(/\.(\w+)?/)[1]}}
+                    </q-tooltip>
+                  </q-icon>
+                  <template v-slot:error>
+                    <div class="absolute-full flex flex-center bg-negative text-white">
+                      読み込みエラー
+                    </div>
+                  </template>
                 </q-img>
               </div>
             </q-scroll-area>
@@ -63,8 +91,13 @@
                   :src="item"
                   spinner-color="white"
                   style="height: 80px; max-width: 150px"
-                  @click="switchSelect(item)"
-                />
+                  @click="switchSelect(item)" >
+                  <template v-slot:error>
+                    <div class="absolute-full flex flex-center bg-negative text-white">
+                      読み込みエラー
+                    </div>
+                  </template>
+                </q-img>
             </q-scroll-area>
             <div class="col-2">
               <q-btn color="primary" icon="add" label="追加" @click="addImage" />
@@ -72,6 +105,9 @@
           </div>
       </q-card-section>
     </q-card>
+    <image-edit-dialog
+      :bus="bus">
+    </image-edit-dialog>
   </q-dialog>
 </template>
 
@@ -79,10 +115,12 @@
 import { request } from '../../../../api/request'
 import { ImageManagerActionType } from '../MonacoEditor/utils'
 import { QImg } from 'quasar'
+import ImageEditDialog from './ImageEditDialog'
 
 export default {
   components: {
-    QImg
+    QImg,
+    ImageEditDialog
   },
   data () {
     return {
@@ -90,7 +128,9 @@ export default {
       dirlist: [],
       filelist: [],
       selecturl: '',
+      selectfile: '',
       selectlist: [],
+      selected: '',
       expanded: ['assets']
     }
   },
@@ -98,30 +138,36 @@ export default {
     bus: {
       type: Object,
       required: true
+    },
+    article: {
+      type: Object,
+      required: true
     }
   },
   methods: {
-    // 以下方法是必需的
-    // (不要改变它的名称 --> "show")
     show () {
-      this.reloadDirList()
       this.dirlist = []
       this.filelist = []
       this.selectlist = []
-      this.selecturl = ''
+      this.reloadDirList()
+      this.loadFileList(this.article.slug + '/')
+      this.selected = this.article.slug
       this.$refs.dialog.show()
     },
 
-    // 以下方法是必需的
-    // (不要改变它的名称 --> "hide")
     hide () {
       this.$refs.dialog.hide()
     },
+
     onDialogHide () {
-      // QDialog发出“hide”事件时
-      // 需要发出
       this.$emit('hide')
     },
+
+    showInfo (url) {
+      console.log(url)
+      this.bus.$emit(ImageManagerActionType.IMAGEMANAGER_IMAGE_EDIT, url)
+    },
+
     addImage () {
       let md = ''
       let i
@@ -131,6 +177,7 @@ export default {
       this.bus.$emit(ImageManagerActionType.IMAGEMANAGER_INSERT_IMAGE, md)
       this.hide()
     },
+
     switchSelect (url) {
       const index = this.selectlist.indexOf(url)
       if (index >= 0) {
@@ -139,59 +186,65 @@ export default {
         this.selectlist.push(url)
       }
     },
+
+    reload () {
+      this.bus.$emit(ImageManagerActionType.IMAGEMANAGER_LIST_RELOAD)
+    },
+
     loadFileList (url) {
       const self = this
-      this.selecturl = url.replace(/\/$/, '').split('/')[0]
+      this.selecturl = url
       request.get('/imagemgr/list/' + url)
         .then(function (response) {
           self.filelist = response.map((file) => '/imagemgr/data/' + url + file)
         })
     },
-    reloadDirList () {
-      const self = this
-      request.get('/imagemgr/dirlist')
-        .then(function (response) {
-          // [4] フロントエンドに対してレスポンスを返す
-          self.dirlist = []
-          const root = {
-            label: 'assets',
-            children: []
-          }
-          response.forEach((item) => {
-            const tree = item.replace(/\/$/, '').split('/')
-            let e = root
-            let i, j, notfindChildren
-            for (i = 0; i < tree.length; i++) {
-              notfindChildren = 1
-              for (j = 0; j < e.children.length; j++) {
-                if (e.children[j].label === tree[i]) {
-                  e = e.children[j]
-                  notfindChildren = 0
-                  break
-                }
-              }
-              if (notfindChildren) {
-                e.children.push({
-                  label: tree[i],
-                  children: [],
-                  url: item,
-                  self: self,
-                  handler () {
-                    self.loadFileList(this.url)
-                  }
-                })
-              }
+
+    async reloadDirList () {
+      const response = await request.get('/imagemgr/dirlist')
+      this.dirlist = []
+      const root = {
+        label: 'assets',
+        children: []
+      }
+      response.forEach((item) => {
+        const tree = item.replace(/\/$/, '').split('/')
+        let e = root
+        let i, j, notfindChildren
+        for (i = 0; i < tree.length; i++) {
+          notfindChildren = 1
+          for (j = 0; j < e.children.length; j++) {
+            if (e.children[j].label === tree[i]) {
+              e = e.children[j]
+              notfindChildren = 0
+              break
             }
-          })
-          self.dirlist = [
-            root
-          ]
-        })
+          }
+          if (notfindChildren) {
+            e.children.push({
+              label: tree[i],
+              children: [],
+              url: item,
+              self: this,
+              handler () {
+                this.self.loadFileList(this.url)
+              }
+            })
+          }
+        }
+      })
+      this.dirlist = [root]
     }
   },
   mounted () {
     this.bus.$on(ImageManagerActionType.IMAGEMANAGER_OPEN, () => {
       this.show()
+    })
+    this.bus.$on(ImageManagerActionType.IMAGEMANAGER_LIST_RELOAD, () => {
+      this.dirlist = []
+      this.filelist = []
+      this.reloadDirList()
+      this.loadFileList(this.selecturl)
     })
   }
 }
