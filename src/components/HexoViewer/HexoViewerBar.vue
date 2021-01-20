@@ -36,7 +36,7 @@
         anchor="bottom middle"
         self="center middle"
       >
-        {{published?'非公開':'公海'}}
+        {{published?'非公開':'公開'}}
       </q-tooltip>
     </q-btn>
     <q-btn

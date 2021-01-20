@@ -92,11 +92,11 @@ class DispatcherService {
     try {
       this.commit('hexoUi/showLoading')
       await this.dispatch('hexoCore/' + hexoCoreActionTypes.reload, force)
-      message.success({ message: '重载成功' })
+      message.success({ message: '更新成功' })
     } catch (err) {
       if (err.status === 401) return
       if (err.name === 'AsyncRaceAbort') return
-      this.message.error({ message: '重载失败', caption: err.message })
+      this.message.error({ message: '更新失敗', caption: err.message })
     } finally {
       this.commit('hexoUi/hideLoading')
     }
