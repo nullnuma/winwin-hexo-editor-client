@@ -59,7 +59,6 @@ export default {
     async rename () {
       const filename = this.filename
       const newname = this.filename.split('/').reverse().slice(1).reverse().join('/') + '/' + this.newname + '.' + this.filename.match(/[^.]+$/)
-      console.log(filename, newname)
       this.disabled = true
       await request.post('/imagemgr/rename', {
         old: filename,

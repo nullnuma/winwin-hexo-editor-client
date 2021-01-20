@@ -9,7 +9,7 @@
       <q-card-section class="row items-center q-pb-none">
           <div class="text-h6">イメージの追加</div>
           <q-space />
-          <q-btn icon="sync" flat round dense @click="reload"/>
+          <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
       <q-separator />
       <q-card-section>
@@ -164,7 +164,6 @@ export default {
     },
 
     showInfo (url) {
-      console.log(url)
       this.bus.$emit(ImageManagerActionType.IMAGEMANAGER_IMAGE_EDIT, url)
     },
 
