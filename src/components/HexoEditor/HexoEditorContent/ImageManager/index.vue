@@ -171,7 +171,7 @@ export default {
       let md = ''
       let i
       for (i = 0; i < this.selectlist.length; i++) {
-        md += `![${this.selectlist[i].match(/([^/]*)\./)[1].replace(/^\/imagemgr\/data/, '/assets')}](${this.selectlist[i]})\n`
+        md += `![${this.selectlist[i].match(/([^/]*)\./)[1]}](${this.selectlist[i].replace(/^\/imagemgr\/data/, '/assets')})\n`
       }
       this.bus.$emit(ImageManagerActionType.IMAGEMANAGER_INSERT_IMAGE, md)
       this.hide()
